@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <!-- add this -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+  </head>
+  <body>
+    <!-- not important
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    -->
+    
+    <!-- add this -->
+    <div id="myRouter">
+      <p>
+        <router-link to="/foo">Go to Home</router-link>
+        <router-link to="/bar">Go to About</router-link>
+      </p>
+      <router-view></router-view>
+    </div>
+
+    <script>
+      const Home = { template: '<div>Home</div>' }
+      const About = { template: '<div>About</div>' }
+      
+      const routes = [
+        { path: '/', component: Home },
+        { path: '/about', component: About },
+      ]
+
+      const router = VueRouter.createRouter({
+        history: VueRouter.createWebHashHistory(),
+        routes, // short for `routes: routes`
+      })
+      
+      const app = Vue.createApp({})
+      app.use(router)
+      app.mount('#myRouter')
+    </script>
+
+    <!-- built files will be auto injected -->
+  </body>
+</html>
